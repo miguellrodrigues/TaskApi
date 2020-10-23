@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateMatterUseCase } from './CreateMatterUseCase';
 
-export class CreateUserController {
+export class CreateMatterController {
 
     constructor(
         private createMatterUseCase: CreateMatterUseCase
@@ -27,4 +27,4 @@ export class CreateUserController {
             })
         }
     }
-}
+};

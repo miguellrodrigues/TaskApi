@@ -3,11 +3,11 @@ import { Matter } from '../../entities/Matter';
 import { IMattersRepository } from '../IMattersRepository';
 
 const client = new Client({
-    user: 'dbuser',
-    host: 'database.server.com',
-    database: 'mydb',
-    password: 'secretpassword',
-    port: 3211,
+    user: 'postgres',
+    host: 'localhost',
+    database: 'postgres',
+    password: 'root',
+    port: 5432,
 });
 
 client
