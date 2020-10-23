@@ -13,14 +13,16 @@ export class CreateMatterController {
             teacher
         } = request.body;
 
-        try {
-            await this.createMatterUseCase.execute({
-                name: name,
-                teacher: teacher,
-                tasks: []
-            });
+        const data = {
+            name: name,
+            teacher: teacher,
+            tasks: []
+        }
 
-            return response.status(201).send();
+        try {
+            await this.createMatterUseCase.execute(data);
+
+            return response.status(201).json(data);
         } catch (err) {
             return response.status(500).json({
                 message: err.message || 'Unexpected errors'

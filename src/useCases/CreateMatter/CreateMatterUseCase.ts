@@ -12,11 +12,15 @@ export class CreateMatterUseCase {
         const matterAlreadyExists = await this.mattersRepository.findByName(data.name);
 
         if (matterAlreadyExists) {
-            throw new Error("Matter already exists");
+            throw new Error('Matter already exists');
         }
 
         const matter = new Matter(data);
 
-        await this.mattersRepository.save(matter);
+        try {
+            await this.mattersRepository.save(matter);
+        } catch (err) {
+            throw new Error(err.message);
+        }
     }
 };
