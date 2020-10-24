@@ -1,4 +1,3 @@
 export interface IGetTaskRequestDTO {
-
-    name: string;
+  name: string;
 }

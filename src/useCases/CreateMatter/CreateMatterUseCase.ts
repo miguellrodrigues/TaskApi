@@ -1,26 +1,25 @@
-import { Matter } from "../../entities/Matter";
-import { IMattersRepository } from "../../repositories/IMattersRepository";
 import { ICreateMatterRequestDTO } from "./CreateMatterDTO";
+import { getRepository } from "typeorm";
+import Matter from "../../database/entities/Matter";
 
 export class CreateMatterUseCase {
+  async execute(data: ICreateMatterRequestDTO) {
+    const mattersRepository = getRepository(Matter);
 
-    constructor(
-        private mattersRepository: IMattersRepository
-    ) { }
+    const matterAlreadyExists = await mattersRepository.findOneOrFail({
+      name: data.name,
+    });
 
-    async execute(data: ICreateMatterRequestDTO) {
-        const matterAlreadyExists = await this.mattersRepository.findByName(data.name);
-
-        if (matterAlreadyExists) {
-            throw new Error('Matter already exists');
-        }
-
-        const matter = new Matter(data);
-
-        try {
-            await this.mattersRepository.save(matter);
-        } catch (err) {
-            throw new Error(err.message);
-        }
+    if (matterAlreadyExists) {
+      throw new Error("Matter already exists");
     }
-};
+
+    try {
+      const matter = mattersRepository.create(data);
+
+      await mattersRepository.save(matter);
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+}

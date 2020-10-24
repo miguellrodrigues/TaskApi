@@ -1,13 +1,8 @@
+import { CreateMatterController } from "./CreateMatterController";
 import { CreateMatterUseCase } from "./CreateMatterUseCase";
-import { CreateMatterController } from './CreateMatterController';
-import { PostgresMattersRepository } from "../../repositories/implementations/PostgresMattersRepository";
 
-const postgresMattersRepository = new PostgresMattersRepository();
-
-const createMatterUseCase = new CreateMatterUseCase(
-    postgresMattersRepository
-);
+const createMatterUseCase = new CreateMatterUseCase();
 
 const createMatterController = new CreateMatterController(createMatterUseCase);
 
-export { createMatterUseCase, createMatterController }
+export { createMatterUseCase, createMatterController };

@@ -1,25 +1,32 @@
-import { IMattersRepository } from "../../repositories/IMattersRepository";
 import { IGetMatterRequestDTO } from "./GetMatterDTO";
+import { getRepository } from "typeorm";
+import Matter from "../../database/entities/Matter";
 
 export class GetMatterUseCase {
+  async execute(data: IGetMatterRequestDTO) {
+    const mattersRepository = getRepository(Matter);
 
-    constructor(
-        private mattersRepository: IMattersRepository
-    ) { }
+    const matter = await mattersRepository.findOneOrFail(
+      {
+        name: data.name,
+      },
+      { relations: ["tasks", "tasks.files"] }
+    );
 
-    async execute(data: IGetMatterRequestDTO) {
-        const matter = await this.mattersRepository.findByName(data.name);
-
-        if (!matter) {
-            throw new Error('Matter not exists');
-        }
-
-        return matter;
+    if (!matter) {
+      throw new Error("Matter not exists");
     }
 
-    async find() {
-        const matters = await this.mattersRepository.find();
+    return matter;
+  }
 
-        return matters;
-    }
-};
+  async find() {
+    const mattersRepository = getRepository(Matter);
+
+    const matters = await mattersRepository.find({
+      relations: ["tasks", "tasks.files"],
+    });
+
+    return matters;
+  }
+}

@@ -1,25 +1,30 @@
-import { ITasksRepository } from "../../repositories/ITasksRepository";
 import { IGetTaskRequestDTO } from "./GetTaskDTO";
+import { getRepository } from "typeorm";
+import Task from "../../database/entities/Task";
 
 export class GetTaskUseCase {
+  async execute(data: IGetTaskRequestDTO) {
+    const tasksRepository = getRepository(Task);
 
-    constructor(
-        private tasksRepository: ITasksRepository
-    ) { }
+    const task = tasksRepository.findOneOrFail(
+      { name: data.name },
+      { relations: ["files"] }
+    );
 
-    async execute(data: IGetTaskRequestDTO) {
-        const task = this.tasksRepository.findByName(data.name);
-
-        if (!task) {
-            throw new Error('Task not exists');
-        }
-
-        return task;
+    if (!task) {
+      throw new Error("Task not exists");
     }
 
-    async find() {
-        const tasks = await this.tasksRepository.find();
+    return task;
+  }
 
-        return tasks;
-    }
-};
+  async find() {
+    const tasksRepository = getRepository(Task);
+
+    const tasks = await tasksRepository.find({
+      relations: ["files"],
+    });
+
+    return tasks;
+  }
+}
