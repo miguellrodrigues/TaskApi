@@ -38,7 +38,9 @@ export class GetTaskController {
     const { id } = request.params;
 
     try {
-      return await this.getTaskUseCase.remainingTime(id);
+      const remainingTime = await this.getTaskUseCase.remainingTime(id);
+
+      return response.status(200).json({ remainingTime: remainingTime });
     } catch (err) {
       return response.status(500).json({
         message: err.message || 'Unexpected errors',
