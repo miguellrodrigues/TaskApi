@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createMatterController } from "./useCases/CreateMatter";
-import { getMatterController } from "./useCases/GetMatter";
+import { createMatterController } from "./useCases/Matter/CreateMatter";
+import { getMatterController } from "./useCases/Matter/GetMatter";
 
 const router = Router();
 

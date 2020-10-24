@@ -1,10 +1,13 @@
+import { uuid } from "uuidv4";
+
 export class TaskFile {
 
     public readonly id: string;
     public url: string;
 
-    constructor(id: string, url: string) {
-        this.id = id;
-        this.url = url;
+    constructor(props: Omit<TaskFile, 'id'>, id?: string) {
+        if (!id) {
+            this.id = uuid();
+        }
     }
 }
