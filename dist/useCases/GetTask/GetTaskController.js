@@ -8,7 +8,7 @@ class GetTaskController {
     async handle(request, response) {
         const { name } = request.params;
         const data = {
-            name
+            name,
         };
         try {
             const task = await this.getTaskUseCase.execute(data);
@@ -16,7 +16,7 @@ class GetTaskController {
         }
         catch (err) {
             return response.status(500).json({
-                message: err.message || 'Unexpected errors'
+                message: err.message || 'Unexpected errors',
             });
         }
     }
@@ -27,7 +27,18 @@ class GetTaskController {
         }
         catch (err) {
             return response.status(500).json({
-                message: err.message || 'Unexpected errors'
+                message: err.message || 'Unexpected errors',
+            });
+        }
+    }
+    async getRemainingTime(request, response) {
+        const { id } = request.params;
+        try {
+            return await this.getTaskUseCase.remainingTime(id);
+        }
+        catch (err) {
+            return response.status(500).json({
+                message: err.message || 'Unexpected errors',
             });
         }
     }

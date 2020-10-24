@@ -14,13 +14,13 @@ class CreateTaskUseCase {
         try {
             const task = tasksRepository.create(data);
             const matter = await mattersRepository.findOneOrFail(data.matter_id, {
-                relations: ["tasks"],
+                relations: ['tasks'],
             });
             matter.tasks.push(task);
             await mattersRepository.save(matter);
         }
         catch (err) {
-            throw new Error(err.message || "Unexpected error has ocurred");
+            throw new Error(err.message || 'Unexpected error has ocurred');
         }
     }
 }

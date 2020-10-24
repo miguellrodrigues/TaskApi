@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { CreateMatterUseCase } from "./CreateMatterUseCase";
-import * as Yup from "yup";
+import { Request, Response } from 'express';
+import { CreateMatterUseCase } from './CreateMatterUseCase';
+import * as Yup from 'yup';
 
 export class CreateMatterController {
   constructor(private createMatterUseCase: CreateMatterUseCase) {}
@@ -28,7 +28,7 @@ export class CreateMatterController {
       return response.status(201).json(data);
     } catch (err) {
       return response.status(500).json({
-        message: err.message || "Unexpected errors",
+        message: err.message || 'Unexpected errors',
       });
     }
   }
