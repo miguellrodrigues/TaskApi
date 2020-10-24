@@ -6,5 +6,9 @@ export interface ITasksRepository {
 
     findById(id: string): Promise<Task>;
 
+    findByName(name: string): Promise<Task>;
+
+    findByMatterId(matterId: string): Promise<Task[]>;
+
     save(task: Task): Promise<void>;
 };

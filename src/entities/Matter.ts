@@ -7,7 +7,7 @@ export class Matter {
 
     public name: string;
     public teacher: string;
-    public tasks?: Task[];
+    public tasks: Task[];
 
     constructor(props: Omit<Matter, 'id'>, id?: string) {
         Object.assign(this, props);

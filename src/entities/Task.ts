@@ -11,6 +11,8 @@ export class Task {
 
     public files: TaskFile[];
 
+    public matter_id: string;
+
     constructor(props: Omit<Task, 'id'>, id?: string) {
         Object.assign(this, props);
 
