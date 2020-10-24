@@ -33,7 +33,7 @@ export class CreateTaskController {
     });
 
     const spl = deliveryDate.split("/");
-    let date = new Date(spl[2], spl[1], spl[0], 23, 59, 0);
+    let date = new Date(spl[2], --spl[1], spl[0], 23, 59, 0);
 
     const deliveryTime = String(date.getTime()) as any;
 

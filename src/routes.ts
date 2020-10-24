@@ -1,4 +1,4 @@
-import { Request, Router } from "express";
+import { Router } from "express";
 
 import { createMatterController } from "./useCases/CreateMatter";
 import { getMatterController } from "./useCases/GetMatter";

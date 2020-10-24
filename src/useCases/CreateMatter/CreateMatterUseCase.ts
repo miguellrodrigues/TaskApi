@@ -6,7 +6,7 @@ export class CreateMatterUseCase {
   async execute(data: ICreateMatterRequestDTO) {
     const mattersRepository = getRepository(Matter);
 
-    const matterAlreadyExists = await mattersRepository.findOneOrFail({
+    const matterAlreadyExists = await mattersRepository.findOne({
       name: data.name,
     });
 
