@@ -8,8 +8,12 @@ Essas instruções fornecerão uma cópia do projeto em funcionamento em sua má
 
 ### Pré-requisitos
 
-Node
-Yarn ou Npm
+
+<ul>
+  <li>Node</li>
+  <li>Yarn ou Npm<li/>
+</ul>
+
 
 ``` 
   Use a versão estável mais recente para evitar problemas
