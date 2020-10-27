@@ -1,6 +1,6 @@
 # TaskApi
 
-Este projeto tem o intuito de gerenciar atividades de uma determinada turma escolar.
+Este projeto tem o intuito de gerenciar atividades de uma determinada turma de graduação.
 
 ## Começando
 
