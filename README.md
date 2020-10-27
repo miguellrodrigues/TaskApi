@@ -11,7 +11,7 @@ Essas instruções fornecerão uma cópia do projeto em funcionamento em sua má
 
 <ul>
   <li>Node</li>
-  <li>Yarn ou Npm<li/>
+  <li>Yarn ou Npm</li>
 </ul>
 
 
