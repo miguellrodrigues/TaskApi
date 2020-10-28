@@ -1,10 +1,10 @@
-import express, {response} from "express";
+import express, { response } from 'express';
 
-import "express-async-errors";
-import errorHandler from "./errors/handler";
+import 'express-async-errors';
+import errorHandler from './errors/Handler';
 
-import { router } from "./routes";
-import cors from "cors";
+import { router } from './routes';
+import cors from 'cors';
 
 const app = express();
 
