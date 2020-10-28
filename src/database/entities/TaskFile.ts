@@ -10,6 +10,7 @@ import Task from "./Task";
 
 @Entity("files")
 export default class TaskFile {
+
   @PrimaryGeneratedColumn("increment")
   id: number;
 
