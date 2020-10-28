@@ -1,5 +1,5 @@
-import CreateClassRoomController from './CreateClassRoomController';
-import CreateClassRoomUseCase from './CreateClassRoomUseCase';
+import { CreateClassRoomController } from './CreateClassRoomController';
+import { CreateClassRoomUseCase } from './CreateClassRoomUseCase';
 
 const createClassRoomUseCase = new CreateClassRoomUseCase();
 

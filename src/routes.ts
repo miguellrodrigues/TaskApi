@@ -10,6 +10,10 @@ import { getClassRoomController } from './useCases/GetClassRoom';
 const router = Router();
 
 router.get('/classes', (request, response) => {
+  return getClassRoomController.find(request, response);
+});
+
+router.get('/classes/:name', (request, response) => {
   return getClassRoomController.handle(request, response);
 });
 

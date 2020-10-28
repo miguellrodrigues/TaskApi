@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import CreateClassRoomUseCase from './CreateClassRoomUseCase';
 import * as Yup from 'yup';
+import { CreateClassRoomUseCase } from './CreateClassRoomUseCase';
 
 export class CreateClassRoomController {
   constructor(private createClassRoomUseCase: CreateClassRoomUseCase) {}

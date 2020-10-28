@@ -1,9 +1,11 @@
-import { ICreateMatterRequestDTO } from "./CreateMatterDTO";
-import { getRepository } from "typeorm";
-import Matter from "../../database/entities/Matter";
+import { ICreateMatterRequestDTO } from './CreateMatterDTO';
+import { getRepository } from 'typeorm';
+import Matter from '../../database/entities/Matter';
+import ClassRoom from '../../database/entities/ClassRoom';
 
 export class CreateMatterUseCase {
   async execute(data: ICreateMatterRequestDTO) {
+    const classesRepository = getRepository(ClassRoom);
     const mattersRepository = getRepository(Matter);
 
     const matterAlreadyExists = await mattersRepository.findOne({
@@ -11,13 +13,19 @@ export class CreateMatterUseCase {
     });
 
     if (matterAlreadyExists) {
-      throw new Error("Matter already exists");
+      throw new Error('Matter already exists');
     }
 
     try {
       const matter = mattersRepository.create(data);
 
-      await mattersRepository.save(matter);
+      const classRoom = await classesRepository.findOneOrFail({
+        name: data.name,
+      });
+
+      classRoom.matters.push(matter);
+
+      await classesRepository.save(classRoom);
     } catch (err) {
       throw new Error(err.message);
     }

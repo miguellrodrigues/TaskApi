@@ -19,55 +19,30 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateTaskController = void 0;
+exports.CreateClassRoomController = void 0;
 const Yup = __importStar(require("yup"));
-class CreateTaskController {
-    constructor(createTaskUseCase) {
-        this.createTaskUseCase = createTaskUseCase;
+class CreateClassRoomController {
+    constructor(createClassRoomUseCase) {
+        this.createClassRoomUseCase = createClassRoomUseCase;
     }
     async handle(request, response) {
-        var { name, description, deliveryDate, files, matter_id } = request.body;
-        const validateData = {
-            name,
-            description,
-            deliveryDate,
-            files,
-            matter_id,
-        };
+        const { name } = request.body;
+        const data = { name: name };
         const schema = Yup.object().shape({
             name: Yup.string().required(),
-            description: Yup.string().required(),
-            deliveryDate: Yup.string().required(),
-            matter_id: Yup.string().required(),
-            files: Yup.array(Yup.object().shape({
-                url: Yup.string().required(),
-            })),
         });
-        await schema.validate(validateData, {
+        await schema.validate(data, {
             abortEarly: false,
         });
-        const spl = deliveryDate.split('/');
-        let date = new Date(spl[2], --spl[1], spl[0], 23, 59, 0);
-        const deliveryTime = String(date.getTime());
-        if (!files) {
-            files = [];
-        }
-        const data = {
-            name,
-            description,
-            deliveryTime,
-            files,
-            matter_id,
-        };
         try {
-            await this.createTaskUseCase.execute(data);
+            await this.createClassRoomUseCase.execute(data);
             return response.status(201).json(data);
         }
         catch (err) {
             return response.status(500).json({
-                message: err.message || 'Unexpected error',
+                message: err.message || 'Unexpected errors',
             });
         }
     }
 }
-exports.CreateTaskController = CreateTaskController;
+exports.CreateClassRoomController = CreateClassRoomController;
