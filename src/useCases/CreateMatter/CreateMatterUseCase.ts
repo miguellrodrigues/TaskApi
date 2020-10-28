@@ -23,7 +23,7 @@ export class CreateMatterUseCase {
         {
           name: data.classroom,
         },
-        { relations: ['matters', 'matters.tasks', 'matters.tasks.files'] },
+        { relations: ['matters'] },
       );
 
       classRoom.matters.push(matter);
