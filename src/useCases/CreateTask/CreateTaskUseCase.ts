@@ -11,9 +11,12 @@ export class CreateTaskUseCase {
     try {
       const task = tasksRepository.create(data);
 
-      const matter = await mattersRepository.findOneOrFail(data.matter_id, {
-        relations: ['tasks'],
-      });
+      const matter = await mattersRepository.findOneOrFail(
+        { name: data.matterName },
+        {
+          relations: ['tasks'],
+        },
+      );
 
       matter.tasks.push(task);
 

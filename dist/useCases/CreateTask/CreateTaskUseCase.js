@@ -13,7 +13,7 @@ class CreateTaskUseCase {
         const mattersRepository = typeorm_1.getRepository(Matter_1.default);
         try {
             const task = tasksRepository.create(data);
-            const matter = await mattersRepository.findOneOrFail(data.matter_id, {
+            const matter = await mattersRepository.findOneOrFail({ name: data.matterName }, {
                 relations: ['tasks'],
             });
             matter.tasks.push(task);

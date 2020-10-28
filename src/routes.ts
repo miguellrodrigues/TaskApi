@@ -4,8 +4,22 @@ import { createMatterController } from './useCases/CreateMatter';
 import { getMatterController } from './useCases/GetMatter';
 import { createTaskController } from './useCases/CreateTask';
 import { getTasksController } from './useCases/GetTask';
+import { createClassRoomController } from './useCases/CreateClassRoom';
+import { getClassRoomController } from './useCases/GetClassRoom';
 
 const router = Router();
+
+router.get('/classes', (request, response) => {
+  return getClassRoomController.find(request, response);
+});
+
+router.get('/classes/:name', (request, response) => {
+  return getClassRoomController.handle(request, response);
+});
+
+router.post('/classes', (request, response) => {
+  return createClassRoomController.handle(request, response);
+});
 
 router.get('/matters', (request, response) => {
   return getMatterController.find(request, response);

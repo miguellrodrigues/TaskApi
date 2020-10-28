@@ -1,23 +1,17 @@
 import { Request, Response } from 'express';
-import { CreateMatterUseCase } from './CreateMatterUseCase';
 import * as Yup from 'yup';
+import { CreateClassRoomUseCase } from './CreateClassRoomUseCase';
 
-export class CreateMatterController {
-  constructor(private createMatterUseCase: CreateMatterUseCase) {}
+export class CreateClassRoomController {
+  constructor(private createClassRoomUseCase: CreateClassRoomUseCase) {}
 
   async handle(request: Request, response: Response) {
-    const { name, teacher, classroom } = request.body;
+    const { name } = request.body;
 
-    const data = {
-      name: name,
-      teacher: teacher,
-      classroom: classroom,
-    };
+    const data = { name: name };
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),
-      teacher: Yup.string().required(),
-      classroom: Yup.string().required(),
     });
 
     await schema.validate(data, {
@@ -25,7 +19,7 @@ export class CreateMatterController {
     });
 
     try {
-      await this.createMatterUseCase.execute(data);
+      await this.createClassRoomUseCase.execute(data);
 
       return response.status(201).json(data);
     } catch (err) {

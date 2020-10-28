@@ -26,14 +26,16 @@ class CreateMatterController {
         this.createMatterUseCase = createMatterUseCase;
     }
     async handle(request, response) {
-        const { name, teacher } = request.body;
+        const { name, teacher, classroom } = request.body;
         const data = {
             name: name,
             teacher: teacher,
+            classroom: classroom,
         };
         const schema = Yup.object().shape({
             name: Yup.string().required(),
             teacher: Yup.string().required(),
+            classroom: Yup.string().required(),
         });
         await schema.validate(data, {
             abortEarly: false,

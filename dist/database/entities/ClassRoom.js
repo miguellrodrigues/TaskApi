@@ -13,36 +13,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const ClassRoom_1 = __importDefault(require("./ClassRoom"));
-const ClassRoom_2 = __importDefault(require("./ClassRoom"));
-const Task_1 = __importDefault(require("./Task"));
-let Matter = class Matter {
+const Matter_1 = __importDefault(require("./Matter"));
+let ClassRoom = class ClassRoom {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn('increment'),
     __metadata("design:type", Number)
-], Matter.prototype, "id", void 0);
+], ClassRoom.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Matter.prototype, "name", void 0);
+], ClassRoom.prototype, "name", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Matter.prototype, "teacher", void 0);
-__decorate([
-    typeorm_1.OneToMany(() => Task_1.default, (task) => task.matter, {
+    typeorm_1.OneToMany(() => Matter_1.default, (matter) => matter.classRoom, {
         cascade: ['insert', 'update', 'remove'],
     }),
-    typeorm_1.JoinColumn({ name: 'matter_id' }),
-    __metadata("design:type", Array)
-], Matter.prototype, "tasks", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => ClassRoom_1.default, (classroom) => classroom.matters),
     typeorm_1.JoinColumn({ name: 'classroom_id' }),
-    __metadata("design:type", ClassRoom_2.default)
-], Matter.prototype, "classRoom", void 0);
-Matter = __decorate([
-    typeorm_1.Entity('matters')
-], Matter);
-exports.default = Matter;
+    __metadata("design:type", Array)
+], ClassRoom.prototype, "matters", void 0);
+ClassRoom = __decorate([
+    typeorm_1.Entity('classes')
+], ClassRoom);
+exports.default = ClassRoom;

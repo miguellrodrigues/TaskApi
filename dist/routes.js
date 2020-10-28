@@ -6,8 +6,19 @@ const CreateMatter_1 = require("./useCases/CreateMatter");
 const GetMatter_1 = require("./useCases/GetMatter");
 const CreateTask_1 = require("./useCases/CreateTask");
 const GetTask_1 = require("./useCases/GetTask");
+const CreateClassRoom_1 = require("./useCases/CreateClassRoom");
+const GetClassRoom_1 = require("./useCases/GetClassRoom");
 const router = express_1.Router();
 exports.router = router;
+router.get('/classes', (request, response) => {
+    return GetClassRoom_1.getClassRoomController.find(request, response);
+});
+router.get('/classes/:name', (request, response) => {
+    return GetClassRoom_1.getClassRoomController.handle(request, response);
+});
+router.post('/classes', (request, response) => {
+    return CreateClassRoom_1.createClassRoomController.handle(request, response);
+});
 router.get('/matters', (request, response) => {
     return GetMatter_1.getMatterController.find(request, response);
 });

@@ -4,13 +4,16 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   JoinColumn,
-} from "typeorm";
+  ManyToOne,
+} from 'typeorm';
+import ClassRoom from './ClassRoom';
+import Class from './ClassRoom';
 
-import Task from "./Task";
+import Task from './Task';
 
-@Entity("matters")
+@Entity('matters')
 export default class Matter {
-  @PrimaryGeneratedColumn("increment")
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column()
@@ -20,8 +23,12 @@ export default class Matter {
   teacher: string;
 
   @OneToMany(() => Task, (task) => task.matter, {
-    cascade: ["insert", "update", "remove"],
+    cascade: ['insert', 'update', 'remove'],
   })
-  @JoinColumn({ name: "matter_id" })
+  @JoinColumn({ name: 'matter_id' })
   tasks: Task[];
+
+  @ManyToOne(() => ClassRoom, (classroom) => classroom.matters)
+  @JoinColumn({ name: 'classroom_id' })
+  classRoom: Class;
 }
