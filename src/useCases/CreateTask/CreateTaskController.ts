@@ -6,21 +6,21 @@ export class CreateTaskController {
   constructor(private createTaskUseCase: CreateTaskUseCase) {}
 
   async handle(request: Request, response: Response) {
-    var { name, description, deliveryDate, files, matter_id } = request.body;
+    var { name, description, deliveryDate, files, matterName } = request.body;
 
     const validateData = {
       name,
       description,
       deliveryDate,
       files,
-      matter_id,
+      matterName,
     };
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       description: Yup.string().required(),
       deliveryDate: Yup.string().required(),
-      matter_id: Yup.string().required(),
+      matterName: Yup.string().required(),
       files: Yup.array(
         Yup.object().shape({
           url: Yup.string().required(),
@@ -46,7 +46,7 @@ export class CreateTaskController {
       description,
       deliveryTime,
       files,
-      matter_id,
+      matterName,
     };
 
     try {

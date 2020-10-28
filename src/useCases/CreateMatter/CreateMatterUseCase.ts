@@ -19,9 +19,12 @@ export class CreateMatterUseCase {
     try {
       const matter = mattersRepository.create(data);
 
-      const classRoom = await classesRepository.findOneOrFail({
-        name: data.name,
-      });
+      const classRoom = await classesRepository.findOneOrFail(
+        {
+          name: data.classroom,
+        },
+        { relations: ['matters', 'matters.tasks', 'matters.tasks.files'] },
+      );
 
       classRoom.matters.push(matter);
 

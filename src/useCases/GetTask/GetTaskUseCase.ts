@@ -1,6 +1,6 @@
-import { IGetTaskRequestDTO } from "./GetTaskDTO";
-import { getRepository } from "typeorm";
-import Task from "../../database/entities/Task";
+import { IGetTaskRequestDTO } from './GetTaskDTO';
+import { getRepository } from 'typeorm';
+import Task from '../../database/entities/Task';
 
 export class GetTaskUseCase {
   async execute(data: IGetTaskRequestDTO) {
@@ -8,11 +8,11 @@ export class GetTaskUseCase {
 
     const task = tasksRepository.findOneOrFail(
       { name: data.name },
-      { relations: ["files"] }
+      { relations: ['files'] },
     );
 
     if (!task) {
-      throw new Error("Task not exists");
+      throw new Error('Task not exists');
     }
 
     return task;
@@ -22,7 +22,7 @@ export class GetTaskUseCase {
     const tasksRepository = getRepository(Task);
 
     const tasks = await tasksRepository.find({
-      relations: ["files"],
+      relations: ['files'],
     });
 
     return tasks;
