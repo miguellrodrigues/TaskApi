@@ -2,7 +2,7 @@ import { getRepository } from 'typeorm';
 import ClassRoom from '../../database/entities/ClassRoom';
 import { ICreateClassRoomRequestDTO } from './CreateClassRoomDTO';
 
-export default class CreateClassRoomUseCase {
+export class CreateClassRoomUseCase {
   async execute(data: ICreateClassRoomRequestDTO) {
     const classesRepository = getRepository(ClassRoom);
 

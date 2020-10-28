@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CreateClassRoomUseCase from './CreateClassRoomUseCase';
 import * as Yup from 'yup';
 
-export default class CreateClassRoomController {
+export class CreateClassRoomController {
   constructor(private createClassRoomUseCase: CreateClassRoomUseCase) {}
 
   async handle(request: Request, response: Response) {
